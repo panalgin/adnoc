@@ -70,5 +70,29 @@ namespace DataEntryApp.Properties {
                 this["Password"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SuccessPath {
+            get {
+                return ((string)(this["SuccessPath"]));
+            }
+            set {
+                this["SuccessPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FailPath {
+            get {
+                return ((string)(this["FailPath"]));
+            }
+            set {
+                this["FailPath"] = value;
+            }
+        }
     }
 }

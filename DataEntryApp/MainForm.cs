@@ -220,5 +220,41 @@ namespace DataEntryApp
         {
             ClearInput();
         }
+
+        private void Results_View_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (Results_View.Enabled && Results_View.Items != null && Results_View.Items.Count > 0)
+            {
+                ListViewHitTestInfo info = this.Results_View.HitTest(e.X, e.Y);
+                ListViewItem item = info.Item;
+
+                if (item != null && !string.IsNullOrEmpty(this.Uid_Box.Text))
+                {
+                    var uid = this.Uid_Box.Text;
+                    var guestId = Convert.ToInt32(item.Tag);
+
+                    AssignCardToGuest(uid, guestId);
+                }
+            }
+        }
+
+        private void Search_Box_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                if (!string.IsNullOrEmpty(this.Uid_Box.Text) 
+                    && this.Search_Box.Text.Length >= 2 
+                    && this.Results_View.Items != null 
+                    && this.Results_View.Items.Count > 0)
+                {
+                    var item = this.Results_View.Items[0];
+
+                    var uid = this.Uid_Box.Text;
+                    var guestId = Convert.ToInt32(item.Tag);
+
+                    AssignCardToGuest(uid, guestId);
+                }
+            }
+        }
     }
 }

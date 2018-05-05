@@ -98,6 +98,7 @@
             this.Search_Box.Size = new System.Drawing.Size(252, 20);
             this.Search_Box.TabIndex = 1;
             this.Search_Box.TextChanged += new System.EventHandler(this.Search_Box_TextChanged);
+            this.Search_Box.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Search_Box_KeyDown);
             // 
             // Results_View
             // 
@@ -120,6 +121,7 @@
             this.Results_View.UseCompatibleStateImageBehavior = false;
             this.Results_View.View = System.Windows.Forms.View.Details;
             this.Results_View.SelectedIndexChanged += new System.EventHandler(this.Results_View_SelectedIndexChanged);
+            this.Results_View.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Results_View_MouseDoubleClick);
             // 
             // columnHeader1
             // 
