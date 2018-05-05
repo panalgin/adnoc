@@ -25,7 +25,7 @@ namespace DataEntryApp
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<Token> Tokens { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
     }
 }
