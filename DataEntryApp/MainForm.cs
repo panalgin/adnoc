@@ -1,21 +1,22 @@
 ﻿using DataEntryApp.Properties;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.Common;
-using System.Data.Entity.Core.EntityClient;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DataEntryApp
 {
+    public enum ListViewState
+    {
+        All,
+        Unassigned,
+        Assigned,
+    }
     public partial class MainForm : Form
     {
+        public ListViewState ListViewState { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -41,6 +42,8 @@ namespace DataEntryApp
                 {
                     var guests = db.Guests.ToList();
                     MessageBox.Show("Connection was successfull.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    CalculateMetrics();
                 }
             }
             catch (Exception ex)
@@ -57,7 +60,10 @@ namespace DataEntryApp
 
                 using (var context = new EventEntities())
                 {
-                    var result = context.Guests.Where(q => (q.Name.ToUpper() + " " + q.Surname.ToUpper()).Contains(key)).ToList();
+                    var result = (from guest in context.Guests
+                                  where (guest.Name.ToUpper() + " " + guest.Surname.ToUpper()).Contains(key) &&
+                                  !context.Tokens.Any(q => q.GuestID == guest.ID) 
+                                  select guest).ToList();
 
                     if (result.Count > 0)
                     {
@@ -106,10 +112,17 @@ namespace DataEntryApp
             PcscReader.Error += PcscReader_Error;
         }
 
+
+        string lastErrorMessage = "";
+
         private void PcscReader_Error(string message)
         {
-            ClearInput();
+            if (lastErrorMessage != message)
+            {
+                lastErrorMessage = message;
 
+                ClearInput();
+            }
         }
 
         private void ClearInput()
@@ -168,11 +181,15 @@ namespace DataEntryApp
             else
             {
                 this.Assign_Button.Enabled = false;
-                this.Cancel_Button.Enabled = false;
             }
         }
 
         private void Assign_Button_Click(object sender, EventArgs e)
+        {
+            AssignSelectedItem();
+        }
+
+        void AssignSelectedItem()
         {
             if (this.Results_View.SelectedItems != null && this.Results_View.SelectedItems.Count > 0)
             {
@@ -213,7 +230,21 @@ namespace DataEntryApp
 
         private void CalculateMetrics()
         {
+            using (var context = new EventEntities())
+            {
+                var totalGuests = context.Guests.Count();
+                var unassigned = (from guest in context.Guests
+                                  where !context.Tokens.Any(q => q.GuestID == guest.ID)
+                                  select guest.ID).ToList().Count();
 
+                var assigned = (from guest in context.Guests
+                                where context.Tokens.Any(q => q.GuestID == guest.ID)
+                                select guest.ID).ToList().Count();
+
+                this.Total_Guests_Label.Text = totalGuests.ToString();
+                this.Unassigned_Guests_Label.Text = unassigned.ToString();
+                this.Assigned_Guests_Label.Text = assigned.ToString();
+            }
         }
 
         private void Cancel_Button_Click(object sender, EventArgs e)
@@ -253,6 +284,107 @@ namespace DataEntryApp
                     var guestId = Convert.ToInt32(item.Tag);
 
                     AssignCardToGuest(uid, guestId);
+                }
+            }
+        }
+
+        private void Results_View_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                AssignSelectedItem();
+        }
+
+        private void Radio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (All_Radio.Checked)
+                ListViewState = ListViewState.All;
+            else if (Unassigned_Radio.Checked)
+                ListViewState = ListViewState.Unassigned;
+            else if (Assigned_Radio.Checked)
+                ListViewState = ListViewState.Assigned;
+
+            using (var context = new EventEntities())
+            {
+                List<GuestAudit> result = new List<GuestAudit>();
+
+                switch (ListViewState)
+                {
+                    case ListViewState.All:
+                        {
+                            result = context.Guests.Select(q => new GuestAudit()
+                            {
+                                ID = q.ID,
+                                Uid = "",
+                                Title = q.Prefix,
+                                Name = q.Name,
+                                Surname = q.Surname,
+                                Position = q.Role,
+                                Organization = q.Organization,
+                            }).ToList();
+
+                            break;
+                        }
+
+                    case ListViewState.Unassigned:
+                        {
+                            result = (from guest in context.Guests
+                                      where !context.Tokens.Any(q => q.GuestID == guest.ID)
+                                      select new GuestAudit()
+                                      {
+                                          ID = guest.ID,
+                                          Uid = "",
+                                          Title = guest.Prefix,
+                                          Name = guest.Name,
+                                          Surname = guest.Surname,
+                                          Position = guest.Role,
+                                          Organization = guest.Organization,
+                                      }).ToList();
+
+                            break;
+                        }
+
+                    case ListViewState.Assigned:
+                        {
+                            result = (from guest in context.Guests
+                                      join token in context.Tokens on guest.ID equals token.GuestID
+                                      where context.Tokens.Any(q => q.GuestID == guest.ID)
+                                      select new GuestAudit()
+                                      {
+                                          ID = guest.ID,
+                                          Uid = token.Uid,
+                                          Title = guest.Prefix,
+                                          Name = guest.Name,
+                                          Surname = guest.Surname,
+                                          Position = guest.Role,
+                                          Organization = guest.Organization,
+                                      }).ToList();
+
+                            break;
+                        }
+                }
+
+                if (result.Count > 0)
+                {
+                    this.listView1.BeginUpdate();
+                    this.listView1.Items.Clear();
+
+                    result.All(delegate (GuestAudit audit)
+                    {
+                        var item = new ListViewItem();
+                        item.Tag = audit.ID;
+                        item.Text = audit.Uid;
+                        item.SubItems.Add(audit.Title);
+                        item.SubItems.Add(audit.Name);
+                        item.SubItems.Add(audit.Surname);
+                        item.SubItems.Add(audit.Position);
+                        item.SubItems.Add(audit.Organization);
+
+                        this.listView1.Items.Add(item);
+
+                        return true;
+                    });
+
+                    this.listView1.EndUpdate();
                 }
             }
         }

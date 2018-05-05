@@ -47,6 +47,18 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Assigned_Radio = new System.Windows.Forms.RadioButton();
+            this.Unassigned_Radio = new System.Windows.Forms.RadioButton();
+            this.All_Radio = new System.Windows.Forms.RadioButton();
+            this.Delete_Button = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Password_Box = new System.Windows.Forms.TextBox();
             this.Username_Box = new System.Windows.Forms.TextBox();
@@ -55,11 +67,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Assigned_Guests_Label = new System.Windows.Forms.Label();
+            this.Unassigned_Guests_Label = new System.Windows.Forms.Label();
+            this.Total_Guests_Label = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -121,6 +137,7 @@
             this.Results_View.UseCompatibleStateImageBehavior = false;
             this.Results_View.View = System.Windows.Forms.View.Details;
             this.Results_View.SelectedIndexChanged += new System.EventHandler(this.Results_View_SelectedIndexChanged);
+            this.Results_View.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Results_View_KeyDown);
             this.Results_View.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Results_View_MouseDoubleClick);
             // 
             // columnHeader1
@@ -215,6 +232,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 188);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -241,6 +259,11 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.Assigned_Radio);
+            this.tabPage2.Controls.Add(this.Unassigned_Radio);
+            this.tabPage2.Controls.Add(this.All_Radio);
+            this.tabPage2.Controls.Add(this.Delete_Button);
+            this.tabPage2.Controls.Add(this.listView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -248,6 +271,112 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "List";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // Assigned_Radio
+            // 
+            this.Assigned_Radio.AutoSize = true;
+            this.Assigned_Radio.Location = new System.Drawing.Point(202, 13);
+            this.Assigned_Radio.Name = "Assigned_Radio";
+            this.Assigned_Radio.Size = new System.Drawing.Size(68, 17);
+            this.Assigned_Radio.TabIndex = 4;
+            this.Assigned_Radio.Text = "Assigned";
+            this.Assigned_Radio.UseVisualStyleBackColor = true;
+            this.Assigned_Radio.CheckedChanged += new System.EventHandler(this.Radio_CheckedChanged);
+            // 
+            // Unassigned_Radio
+            // 
+            this.Unassigned_Radio.AutoSize = true;
+            this.Unassigned_Radio.Location = new System.Drawing.Point(97, 13);
+            this.Unassigned_Radio.Name = "Unassigned_Radio";
+            this.Unassigned_Radio.Size = new System.Drawing.Size(81, 17);
+            this.Unassigned_Radio.TabIndex = 3;
+            this.Unassigned_Radio.Text = "Unassigned";
+            this.Unassigned_Radio.UseVisualStyleBackColor = true;
+            this.Unassigned_Radio.CheckedChanged += new System.EventHandler(this.Radio_CheckedChanged);
+            // 
+            // All_Radio
+            // 
+            this.All_Radio.AutoSize = true;
+            this.All_Radio.Checked = true;
+            this.All_Radio.Location = new System.Drawing.Point(6, 13);
+            this.All_Radio.Name = "All_Radio";
+            this.All_Radio.Size = new System.Drawing.Size(36, 17);
+            this.All_Radio.TabIndex = 2;
+            this.All_Radio.TabStop = true;
+            this.All_Radio.Text = "All";
+            this.All_Radio.UseVisualStyleBackColor = true;
+            this.All_Radio.CheckedChanged += new System.EventHandler(this.Radio_CheckedChanged);
+            // 
+            // Delete_Button
+            // 
+            this.Delete_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Delete_Button.Location = new System.Drawing.Point(570, 36);
+            this.Delete_Button.Name = "Delete_Button";
+            this.Delete_Button.Size = new System.Drawing.Size(107, 23);
+            this.Delete_Button.TabIndex = 1;
+            this.Delete_Button.Text = "Delete";
+            this.Delete_Button.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11});
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.Location = new System.Drawing.Point(6, 36);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(558, 242);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Uid";
+            this.columnHeader6.Width = 108;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Title";
+            this.columnHeader7.Width = 38;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Name";
+            this.columnHeader8.Width = 77;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Surname";
+            this.columnHeader9.Width = 86;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Position";
+            this.columnHeader10.Width = 72;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Organization";
+            this.columnHeader11.Width = 172;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(683, 284);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Temporary Cards";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -317,6 +446,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Assigned_Guests_Label);
+            this.groupBox2.Controls.Add(this.Unassigned_Guests_Label);
+            this.groupBox2.Controls.Add(this.Total_Guests_Label);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
@@ -326,6 +458,30 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Statistics";
+            // 
+            // Assigned_Guests_Label
+            // 
+            this.Assigned_Guests_Label.AutoSize = true;
+            this.Assigned_Guests_Label.Location = new System.Drawing.Point(129, 74);
+            this.Assigned_Guests_Label.Name = "Assigned_Guests_Label";
+            this.Assigned_Guests_Label.Size = new System.Drawing.Size(0, 13);
+            this.Assigned_Guests_Label.TabIndex = 5;
+            // 
+            // Unassigned_Guests_Label
+            // 
+            this.Unassigned_Guests_Label.AutoSize = true;
+            this.Unassigned_Guests_Label.Location = new System.Drawing.Point(129, 48);
+            this.Unassigned_Guests_Label.Name = "Unassigned_Guests_Label";
+            this.Unassigned_Guests_Label.Size = new System.Drawing.Size(0, 13);
+            this.Unassigned_Guests_Label.TabIndex = 4;
+            // 
+            // Total_Guests_Label
+            // 
+            this.Total_Guests_Label.AutoSize = true;
+            this.Total_Guests_Label.Location = new System.Drawing.Point(129, 22);
+            this.Total_Guests_Label.Name = "Total_Guests_Label";
+            this.Total_Guests_Label.Size = new System.Drawing.Size(0, 13);
+            this.Total_Guests_Label.TabIndex = 3;
             // 
             // label10
             // 
@@ -366,11 +522,13 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DataEntryApp - v0.0.4";
+            this.Text = "DataEntryApp - v0.0.6";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -411,6 +569,21 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label Assigned_Guests_Label;
+        private System.Windows.Forms.Label Unassigned_Guests_Label;
+        private System.Windows.Forms.Label Total_Guests_Label;
+        private System.Windows.Forms.RadioButton Assigned_Radio;
+        private System.Windows.Forms.RadioButton Unassigned_Radio;
+        private System.Windows.Forms.RadioButton All_Radio;
+        private System.Windows.Forms.Button Delete_Button;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 

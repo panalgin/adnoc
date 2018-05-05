@@ -93,6 +93,7 @@
       <DependentUpon>EventModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Guest.partial.cs" />
+    <Compile Include="GuestAudit.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
