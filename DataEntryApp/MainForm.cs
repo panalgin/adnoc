@@ -43,7 +43,7 @@ namespace DataEntryApp
                     MessageBox.Show("Connection was successfull.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -99,7 +99,56 @@ namespace DataEntryApp
             this.Catalog_Box.Text = set.Catalog;
             this.Username_Box.Text = set.Username;
             this.Password_Box.Text = set.Password;
+
+            PcscReader.Initialize();
+            PcscReader.CardScanned += PcscReader_CardScanned;
+            PcscReader.Error += PcscReader_Error;
         }
 
+        private void PcscReader_Error(string message)
+        {
+            ClearInput();
+
+        }
+
+        private void ClearInput()
+        {
+            this.Uid_Box.Text = "";
+            this.Search_Box.Text = "";
+            this.listView1.Items.Clear();
+            this.button2.Enabled = false;
+            this.button3.Enabled = false;
+        }
+
+        private void PcscReader_CardScanned(string uid)
+        {
+            ClearInput();
+
+            using (var context = new EventEntities())
+            {
+                var exists = context.Tokens.FirstOrDefault(q => q.Uid == uid);
+
+                if (exists != null)
+                {
+                    var guest = context.Guests.FirstOrDefault(q => q.ID == exists.GuestID);
+
+                    if (guest != null)
+                        MessageBox.Show(string.Format("This card already belongs to {0}.", guest.FullName), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else
+                {
+                    this.Uid_Box.Text = uid;
+                    this.Search_Box.Enabled = true;
+                    this.Search_Box.Focus();
+                    this.listView1.Enabled = true;
+                }
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            PcscReader.InvokeScanned("0x0000000");
+        }
     }
 }

@@ -41,7 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Uid_Box = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -92,6 +92,7 @@
             // 
             // Search_Box
             // 
+            this.Search_Box.Enabled = false;
             this.Search_Box.Location = new System.Drawing.Point(84, 32);
             this.Search_Box.Name = "Search_Box";
             this.Search_Box.Size = new System.Drawing.Size(252, 20);
@@ -109,6 +110,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
+            this.listView1.Enabled = false;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(84, 58);
@@ -169,17 +171,20 @@
             this.label4.Size = new System.Drawing.Size(63, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Current Uid:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // textBox2
+            // Uid_Box
             // 
-            this.textBox2.Location = new System.Drawing.Point(84, 6);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(192, 20);
-            this.textBox2.TabIndex = 0;
+            this.Uid_Box.Enabled = false;
+            this.Uid_Box.Location = new System.Drawing.Point(84, 6);
+            this.Uid_Box.Name = "Uid_Box";
+            this.Uid_Box.Size = new System.Drawing.Size(192, 20);
+            this.Uid_Box.TabIndex = 0;
             // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(508, 255);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 23);
@@ -190,6 +195,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(606, 255);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(71, 23);
@@ -212,7 +218,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.Uid_Box);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.Search_Box);
             this.tabPage1.Controls.Add(this.button2);
@@ -383,7 +389,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox Uid_Box;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabControl tabControl1;
