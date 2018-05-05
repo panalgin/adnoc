@@ -9,15 +9,29 @@
 
 namespace DataEntryApp
 {
+    using Properties;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class EventEntities : DbContext
     {
         public EventEntities()
             : base("name=EventEntities")
         {
+
+            Settings.Default.Reload();
+
+            var server = Settings.Default.Server;
+            var catalog = Settings.Default.Catalog;
+            var user = Settings.Default.Username;
+            var password = Settings.Default.Password;
+
+
+            this.Database.Connection.ConnectionString = this.Database.Connection.ConnectionString.Replace("{Server}", server).
+                Replace("{Catalog}", catalog).
+                Replace("{User}", user).
+                Replace("{Password}", password);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

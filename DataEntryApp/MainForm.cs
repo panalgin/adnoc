@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataEntryApp.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -20,11 +21,31 @@ namespace DataEntryApp
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Connect_Button_Click(object sender, EventArgs e)
         {
-            using (var db = new EventEntities())
+            var server = this.Server_Box.Text;
+            var catalog = this.Catalog_Box.Text;
+            var user = this.Username_Box.Text;
+            var password = this.Password_Box.Text;
+
+            Settings.Default.Server = server;
+            Settings.Default.Catalog = catalog;
+            Settings.Default.Username = user;
+            Settings.Default.Password = password;
+
+            Settings.Default.Save();
+
+            try
             {
-                var guests = db.Guests.ToList();
+                using (var db = new EventEntities())
+                {
+                    var guests = db.Guests.ToList();
+                    MessageBox.Show("Connection was successfull.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -62,8 +83,6 @@ namespace DataEntryApp
                         });
 
                         this.listView1.EndUpdate();
-
-
                     }
                     else
                         this.listView1.Items.Clear();
@@ -73,12 +92,14 @@ namespace DataEntryApp
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Settings.Default.Reload();
+            var set = Settings.Default;
 
+            this.Server_Box.Text = set.Server;
+            this.Catalog_Box.Text = set.Catalog;
+            this.Username_Box.Text = set.Username;
+            this.Password_Box.Text = set.Password;
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
