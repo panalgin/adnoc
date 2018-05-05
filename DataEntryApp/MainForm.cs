@@ -61,31 +61,32 @@ namespace DataEntryApp
 
                     if (result.Count > 0)
                     {
-                        this.listView1.BeginUpdate();
+                        this.Results_View.BeginUpdate();
 
-                        this.listView1.Items.Clear();
+                        this.Results_View.Items.Clear();
 
-                        result.All(delegate (Guest quest)
+                        result.All(delegate (Guest guest)
                         {
                             var item = new ListViewItem()
                             {
-                                Text = quest.Prefix,
+                                Text = guest.Prefix,
                             };
 
-                            item.SubItems.Add(quest.Name);
-                            item.SubItems.Add(quest.Surname);
-                            item.SubItems.Add(quest.Role);
-                            item.SubItems.Add(quest.Organization);
+                            item.SubItems.Add(guest.Name);
+                            item.SubItems.Add(guest.Surname);
+                            item.SubItems.Add(guest.Role);
+                            item.SubItems.Add(guest.Organization);
+                            item.Tag = guest.ID;
 
-                            listView1.Items.Add(item);
+                            Results_View.Items.Add(item);
 
                             return true;
                         });
 
-                        this.listView1.EndUpdate();
+                        this.Results_View.EndUpdate();
                     }
                     else
-                        this.listView1.Items.Clear();
+                        this.Results_View.Items.Clear();
                 }
             }
         }
@@ -115,9 +116,13 @@ namespace DataEntryApp
         {
             this.Uid_Box.Text = "";
             this.Search_Box.Text = "";
-            this.listView1.Items.Clear();
-            this.button2.Enabled = false;
-            this.button3.Enabled = false;
+            this.Search_Box.Enabled = false;
+            this.Results_View.Items.Clear();
+            this.Results_View.Enabled = false;
+            this.Assign_Button.Enabled = false;
+            this.Cancel_Button.Enabled = false;
+
+            this.Focus();
         }
 
         private void PcscReader_CardScanned(string uid)
@@ -140,8 +145,10 @@ namespace DataEntryApp
                 {
                     this.Uid_Box.Text = uid;
                     this.Search_Box.Enabled = true;
+                    this.Cancel_Button.Enabled = true;
                     this.Search_Box.Focus();
-                    this.listView1.Enabled = true;
+
+                    this.Results_View.Enabled = true;
                 }
             }
         }
@@ -149,6 +156,69 @@ namespace DataEntryApp
         private void label4_Click(object sender, EventArgs e)
         {
             PcscReader.InvokeScanned("0x0000000");
+        }
+
+        private void Results_View_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Results_View.SelectedItems != null && this.Results_View.SelectedItems.Count > 0)
+            {
+                this.Assign_Button.Enabled = true;
+                this.Cancel_Button.Enabled = true;
+            }
+            else
+            {
+                this.Assign_Button.Enabled = false;
+                this.Cancel_Button.Enabled = false;
+            }
+        }
+
+        private void Assign_Button_Click(object sender, EventArgs e)
+        {
+            if (this.Results_View.SelectedItems != null && this.Results_View.SelectedItems.Count > 0)
+            {
+                var uid = this.Uid_Box.Text;
+                var guestId = Convert.ToInt32(this.Results_View.SelectedItems[0].Tag);
+
+                AssignCardToGuest(uid, guestId);
+            }
+        }
+
+        private void AssignCardToGuest(string uid, int guestId)
+        {
+            using (var context = new EventEntities())
+            {
+                var exists = context.Tokens.FirstOrDefault(q => q.Uid == uid);
+
+                if (exists == null)
+                {
+                    var guest = context.Guests.FirstOrDefault(q => q.ID == guestId);
+
+                    if (guest != null && MessageBox.Show(string.Format("Do you want to assign card uid [{0}] to guest [{1}]", uid, guest.FullName), "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        var token = new Token()
+                        {
+                            Uid = uid,
+                            GuestID = guestId
+                        };
+
+                        context.Tokens.Add(token);
+                        context.SaveChanges();
+                        ClearInput();
+                    }
+                }
+            }
+
+            CalculateMetrics();
+        }
+
+        private void CalculateMetrics()
+        {
+
+        }
+
+        private void Cancel_Button_Click(object sender, EventArgs e)
+        {
+            ClearInput();
         }
     }
 }

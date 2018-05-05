@@ -32,7 +32,7 @@
             this.Catalog_Box = new System.Windows.Forms.TextBox();
             this.Connect_Button = new System.Windows.Forms.Button();
             this.Search_Box = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.Results_View = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,8 +42,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Uid_Box = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.Assign_Button = new System.Windows.Forms.Button();
+            this.Cancel_Button = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -99,26 +99,27 @@
             this.Search_Box.TabIndex = 1;
             this.Search_Box.TextChanged += new System.EventHandler(this.Search_Box_TextChanged);
             // 
-            // listView1
+            // Results_View
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Results_View.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Results_View.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.listView1.Enabled = false;
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(84, 58);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(593, 166);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.Results_View.Enabled = false;
+            this.Results_View.FullRowSelect = true;
+            this.Results_View.GridLines = true;
+            this.Results_View.Location = new System.Drawing.Point(84, 58);
+            this.Results_View.Name = "Results_View";
+            this.Results_View.Size = new System.Drawing.Size(593, 166);
+            this.Results_View.TabIndex = 2;
+            this.Results_View.UseCompatibleStateImageBehavior = false;
+            this.Results_View.View = System.Windows.Forms.View.Details;
+            this.Results_View.SelectedIndexChanged += new System.EventHandler(this.Results_View_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -181,27 +182,29 @@
             this.Uid_Box.Size = new System.Drawing.Size(192, 20);
             this.Uid_Box.TabIndex = 0;
             // 
-            // button2
+            // Assign_Button
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(508, 255);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(92, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Assign";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Assign_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Assign_Button.Enabled = false;
+            this.Assign_Button.Location = new System.Drawing.Point(508, 255);
+            this.Assign_Button.Name = "Assign_Button";
+            this.Assign_Button.Size = new System.Drawing.Size(92, 23);
+            this.Assign_Button.TabIndex = 3;
+            this.Assign_Button.Text = "Assign";
+            this.Assign_Button.UseVisualStyleBackColor = true;
+            this.Assign_Button.Click += new System.EventHandler(this.Assign_Button_Click);
             // 
-            // button3
+            // Cancel_Button
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(606, 255);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(71, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Cancel";
-            this.button3.UseVisualStyleBackColor = true;
+            this.Cancel_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cancel_Button.Enabled = false;
+            this.Cancel_Button.Location = new System.Drawing.Point(606, 255);
+            this.Cancel_Button.Name = "Cancel_Button";
+            this.Cancel_Button.Size = new System.Drawing.Size(71, 23);
+            this.Cancel_Button.TabIndex = 4;
+            this.Cancel_Button.Text = "Cancel";
+            this.Cancel_Button.UseVisualStyleBackColor = true;
+            this.Cancel_Button.Click += new System.EventHandler(this.Cancel_Button_Click);
             // 
             // tabControl1
             // 
@@ -219,10 +222,10 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.Uid_Box);
-            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.Cancel_Button);
             this.tabPage1.Controls.Add(this.Search_Box);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.listView1);
+            this.tabPage1.Controls.Add(this.Assign_Button);
+            this.tabPage1.Controls.Add(this.Results_View);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
@@ -380,7 +383,7 @@
         private System.Windows.Forms.TextBox Catalog_Box;
         private System.Windows.Forms.Button Connect_Button;
         private System.Windows.Forms.TextBox Search_Box;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView Results_View;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -390,8 +393,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox Uid_Box;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button Assign_Button;
+        private System.Windows.Forms.Button Cancel_Button;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
