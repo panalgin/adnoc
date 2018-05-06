@@ -12,14 +12,10 @@ namespace DataEntryApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Guest
+    public partial class TemporaryCard
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Position { get; set; }
-        public string Organization { get; set; }
-        public string Level { get; set; }
-        public string Title { get; set; }
+        public string Uid { get; set; }
+        public string Serial { get; set; }
     }
 }

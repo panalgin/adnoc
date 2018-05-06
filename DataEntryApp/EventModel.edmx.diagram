@@ -6,7 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="62b817b876444964a4e78d87fccd1cdc" Name="Diagram1" >
         <EntityTypeShape EntityType="EventModel.Token" Width="1.5" PointX="2.5" PointY="0.75" />
-        <EntityTypeShape EntityType="EventModel.Guest" Width="1.5" PointX="0.875" PointY="0.75" />
+        <EntityTypeShape EntityType="EventModel.Guest" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EventModel.TemporaryCard" Width="1.5" PointX="2.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

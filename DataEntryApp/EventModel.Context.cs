@@ -41,5 +41,6 @@ namespace DataEntryApp
     
         public virtual DbSet<Token> Tokens { get; set; }
         public virtual DbSet<Guest> Guests { get; set; }
+        public virtual DbSet<TemporaryCard> TemporaryCards { get; set; }
     }
 }

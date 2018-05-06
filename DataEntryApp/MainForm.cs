@@ -76,12 +76,12 @@ namespace DataEntryApp
                         {
                             var item = new ListViewItem()
                             {
-                                Text = guest.Prefix,
+                                Text = guest.Title,
                             };
 
                             item.SubItems.Add(guest.Name);
                             item.SubItems.Add(guest.Surname);
-                            item.SubItems.Add(guest.Role);
+                            item.SubItems.Add(guest.Position);
                             item.SubItems.Add(guest.Organization);
                             item.Tag = guest.ID;
 
@@ -342,10 +342,10 @@ namespace DataEntryApp
                                       {
                                           ID = guest.ID,
                                           Uid = t.Uid,
-                                          Title = guest.Prefix,
+                                          Title = guest.Title,
                                           Name = guest.Name,
                                           Surname = guest.Surname,
-                                          Position = guest.Role,
+                                          Position = guest.Position,
                                           Organization = guest.Organization,
                                       }).OrderBy(q => q.Name).ToList();
 
@@ -361,10 +361,10 @@ namespace DataEntryApp
                                       {
                                           ID = guest.ID,
                                           Uid = "",
-                                          Title = guest.Prefix,
+                                          Title = guest.Title,
                                           Name = guest.Name,
                                           Surname = guest.Surname,
-                                          Position = guest.Role,
+                                          Position = guest.Position,
                                           Organization = guest.Organization,
                                       }).OrderBy(q => q.Name).ToList();
 
@@ -380,10 +380,10 @@ namespace DataEntryApp
                                       {
                                           ID = guest.ID,
                                           Uid = token.Uid,
-                                          Title = guest.Prefix,
+                                          Title = guest.Title,
                                           Name = guest.Name,
                                           Surname = guest.Surname,
-                                          Position = guest.Role,
+                                          Position = guest.Position,
                                           Organization = guest.Organization,
                                       }).OrderBy(q => q.Name).ToList();
 
@@ -456,7 +456,11 @@ namespace DataEntryApp
 
         private void Add_Button_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(this.Temp_Uid_Box.Text)
+                && !string.IsNullOrEmpty(this.Serial_Box.Text))
+            {
 
+            }
         }
     }
 }

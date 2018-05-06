@@ -141,7 +141,7 @@
             this.Results_View.GridLines = true;
             this.Results_View.Location = new System.Drawing.Point(84, 58);
             this.Results_View.Name = "Results_View";
-            this.Results_View.Size = new System.Drawing.Size(593, 166);
+            this.Results_View.Size = new System.Drawing.Size(634, 166);
             this.Results_View.TabIndex = 2;
             this.Results_View.UseCompatibleStateImageBehavior = false;
             this.Results_View.View = System.Windows.Forms.View.Details;
@@ -214,7 +214,7 @@
             // 
             this.Assign_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Assign_Button.Enabled = false;
-            this.Assign_Button.Location = new System.Drawing.Point(508, 255);
+            this.Assign_Button.Location = new System.Drawing.Point(549, 255);
             this.Assign_Button.Name = "Assign_Button";
             this.Assign_Button.Size = new System.Drawing.Size(92, 23);
             this.Assign_Button.TabIndex = 3;
@@ -226,7 +226,7 @@
             // 
             this.Cancel_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Cancel_Button.Enabled = false;
-            this.Cancel_Button.Location = new System.Drawing.Point(606, 255);
+            this.Cancel_Button.Location = new System.Drawing.Point(647, 255);
             this.Cancel_Button.Name = "Cancel_Button";
             this.Cancel_Button.Size = new System.Drawing.Size(71, 23);
             this.Cancel_Button.TabIndex = 4;
@@ -245,7 +245,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 188);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(691, 310);
+            this.tabControl1.Size = new System.Drawing.Size(735, 310);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -261,7 +261,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(683, 284);
+            this.tabPage1.Size = new System.Drawing.Size(724, 284);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -276,7 +276,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(683, 284);
+            this.tabPage2.Size = new System.Drawing.Size(724, 284);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "List";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -320,7 +320,7 @@
             // 
             this.Delete_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Delete_Button.Enabled = false;
-            this.Delete_Button.Location = new System.Drawing.Point(570, 36);
+            this.Delete_Button.Location = new System.Drawing.Point(611, 36);
             this.Delete_Button.Name = "Delete_Button";
             this.Delete_Button.Size = new System.Drawing.Size(107, 23);
             this.Delete_Button.TabIndex = 1;
@@ -344,7 +344,7 @@
             this.Status_List.GridLines = true;
             this.Status_List.Location = new System.Drawing.Point(6, 36);
             this.Status_List.Name = "Status_List";
-            this.Status_List.Size = new System.Drawing.Size(558, 242);
+            this.Status_List.Size = new System.Drawing.Size(599, 242);
             this.Status_List.TabIndex = 0;
             this.Status_List.UseCompatibleStateImageBehavior = false;
             this.Status_List.View = System.Windows.Forms.View.Details;
@@ -391,13 +391,16 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(683, 284);
+            this.tabPage3.Size = new System.Drawing.Size(727, 284);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Temporary Cards";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // listView1
             // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader12,
             this.columnHeader13});
@@ -405,7 +408,7 @@
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(262, 14);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(415, 264);
+            this.listView1.Size = new System.Drawing.Size(459, 264);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -539,7 +542,7 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Location = new System.Drawing.Point(284, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(422, 170);
+            this.groupBox2.Size = new System.Drawing.Size(463, 170);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Statistics";
@@ -599,7 +602,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 510);
+            this.ClientSize = new System.Drawing.Size(759, 510);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabControl1);
@@ -607,7 +610,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DataEntryApp - v0.0.6";
+            this.Text = "DataEntryApp - v0.0.7";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
