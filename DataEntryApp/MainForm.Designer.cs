@@ -51,7 +51,7 @@
             this.Unassigned_Radio = new System.Windows.Forms.RadioButton();
             this.All_Radio = new System.Windows.Forms.RadioButton();
             this.Delete_Button = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.Status_List = new System.Windows.Forms.ListView();
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -59,6 +59,14 @@
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Add_Button = new System.Windows.Forms.Button();
+            this.Serial_Box = new System.Windows.Forms.TextBox();
+            this.Temp_Uid_Box = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Password_Box = new System.Windows.Forms.TextBox();
             this.Username_Box = new System.Windows.Forms.TextBox();
@@ -76,6 +84,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -263,7 +272,7 @@
             this.tabPage2.Controls.Add(this.Unassigned_Radio);
             this.tabPage2.Controls.Add(this.All_Radio);
             this.tabPage2.Controls.Add(this.Delete_Button);
-            this.tabPage2.Controls.Add(this.listView1);
+            this.tabPage2.Controls.Add(this.Status_List);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -310,33 +319,36 @@
             // Delete_Button
             // 
             this.Delete_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Delete_Button.Enabled = false;
             this.Delete_Button.Location = new System.Drawing.Point(570, 36);
             this.Delete_Button.Name = "Delete_Button";
             this.Delete_Button.Size = new System.Drawing.Size(107, 23);
             this.Delete_Button.TabIndex = 1;
             this.Delete_Button.Text = "Delete";
             this.Delete_Button.UseVisualStyleBackColor = true;
+            this.Delete_Button.Click += new System.EventHandler(this.Delete_Button_Click);
             // 
-            // listView1
+            // Status_List
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Status_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Status_List.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11});
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(6, 36);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(558, 242);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.Status_List.FullRowSelect = true;
+            this.Status_List.GridLines = true;
+            this.Status_List.Location = new System.Drawing.Point(6, 36);
+            this.Status_List.Name = "Status_List";
+            this.Status_List.Size = new System.Drawing.Size(558, 242);
+            this.Status_List.TabIndex = 0;
+            this.Status_List.UseCompatibleStateImageBehavior = false;
+            this.Status_List.View = System.Windows.Forms.View.Details;
+            this.Status_List.SelectedIndexChanged += new System.EventHandler(this.Status_List_SelectedIndexChanged);
             // 
             // columnHeader6
             // 
@@ -370,6 +382,12 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.listView1);
+            this.tabPage3.Controls.Add(this.Add_Button);
+            this.tabPage3.Controls.Add(this.Serial_Box);
+            this.tabPage3.Controls.Add(this.Temp_Uid_Box);
+            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -377,6 +395,73 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Temporary Cards";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader12,
+            this.columnHeader13});
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.Location = new System.Drawing.Point(262, 14);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(415, 264);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Uid";
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Serial";
+            this.columnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader13.Width = 168;
+            // 
+            // Add_Button
+            // 
+            this.Add_Button.Location = new System.Drawing.Point(181, 66);
+            this.Add_Button.Name = "Add_Button";
+            this.Add_Button.Size = new System.Drawing.Size(75, 23);
+            this.Add_Button.TabIndex = 4;
+            this.Add_Button.Text = "Add";
+            this.Add_Button.UseVisualStyleBackColor = true;
+            this.Add_Button.Click += new System.EventHandler(this.Add_Button_Click);
+            // 
+            // Serial_Box
+            // 
+            this.Serial_Box.Location = new System.Drawing.Point(92, 40);
+            this.Serial_Box.Name = "Serial_Box";
+            this.Serial_Box.Size = new System.Drawing.Size(164, 20);
+            this.Serial_Box.TabIndex = 3;
+            // 
+            // Temp_Uid_Box
+            // 
+            this.Temp_Uid_Box.Enabled = false;
+            this.Temp_Uid_Box.Location = new System.Drawing.Point(92, 14);
+            this.Temp_Uid_Box.Name = "Temp_Uid_Box";
+            this.Temp_Uid_Box.Size = new System.Drawing.Size(164, 20);
+            this.Temp_Uid_Box.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(22, 43);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 13);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Serial Code:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(60, 17);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Uid:";
             // 
             // groupBox1
             // 
@@ -529,6 +614,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -576,7 +663,7 @@
         private System.Windows.Forms.RadioButton Unassigned_Radio;
         private System.Windows.Forms.RadioButton All_Radio;
         private System.Windows.Forms.Button Delete_Button;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView Status_List;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
@@ -584,6 +671,14 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.Button Add_Button;
+        private System.Windows.Forms.TextBox Serial_Box;
+        private System.Windows.Forms.TextBox Temp_Uid_Box;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }
 

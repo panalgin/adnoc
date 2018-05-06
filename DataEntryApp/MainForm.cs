@@ -44,6 +44,7 @@ namespace DataEntryApp
                     MessageBox.Show("Connection was successfull.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     CalculateMetrics();
+                    PopulateStatusList();
                 }
             }
             catch (Exception ex)
@@ -62,7 +63,7 @@ namespace DataEntryApp
                 {
                     var result = (from guest in context.Guests
                                   where (guest.Name.ToUpper() + " " + guest.Surname.ToUpper()).Contains(key) &&
-                                  !context.Tokens.Any(q => q.GuestID == guest.ID) 
+                                  !context.Tokens.Any(q => q.GuestID == guest.ID)
                                   select guest).ToList();
 
                     if (result.Count > 0)
@@ -134,6 +135,8 @@ namespace DataEntryApp
             this.Results_View.Enabled = false;
             this.Assign_Button.Enabled = false;
             this.Cancel_Button.Enabled = false;
+            this.Temp_Uid_Box.Text = "";
+            this.Search_Box.Text = "";
 
             this.Focus();
         }
@@ -157,6 +160,7 @@ namespace DataEntryApp
                 else
                 {
                     this.Uid_Box.Text = uid;
+                    this.Temp_Uid_Box.Text = uid;
                     this.Search_Box.Enabled = true;
                     this.Cancel_Button.Enabled = true;
                     this.Search_Box.Focus();
@@ -273,9 +277,9 @@ namespace DataEntryApp
         {
             if (e.KeyCode == Keys.F1)
             {
-                if (!string.IsNullOrEmpty(this.Uid_Box.Text) 
-                    && this.Search_Box.Text.Length >= 2 
-                    && this.Results_View.Items != null 
+                if (!string.IsNullOrEmpty(this.Uid_Box.Text)
+                    && this.Search_Box.Text.Length >= 2
+                    && this.Results_View.Items != null
                     && this.Results_View.Items.Count > 0)
                 {
                     var item = this.Results_View.Items[0];
@@ -303,6 +307,26 @@ namespace DataEntryApp
             else if (Assigned_Radio.Checked)
                 ListViewState = ListViewState.Assigned;
 
+            PopulateStatusList();
+        }
+
+        private void Status_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Status_List.SelectedItems != null && this.Status_List.SelectedItems.Count > 0)
+            {
+                var item = this.Status_List.SelectedItems[0];
+
+                if (item.Text.Length > 0)
+                    this.Delete_Button.Enabled = true;
+                else
+                    this.Delete_Button.Enabled = false;
+            }
+            else
+                this.Delete_Button.Enabled = false;
+        }
+
+        private void PopulateStatusList()
+        {
             using (var context = new EventEntities())
             {
                 List<GuestAudit> result = new List<GuestAudit>();
@@ -311,16 +335,20 @@ namespace DataEntryApp
                 {
                     case ListViewState.All:
                         {
-                            result = context.Guests.Select(q => new GuestAudit()
-                            {
-                                ID = q.ID,
-                                Uid = "",
-                                Title = q.Prefix,
-                                Name = q.Name,
-                                Surname = q.Surname,
-                                Position = q.Role,
-                                Organization = q.Organization,
-                            }).ToList();
+                            result = (from guest in context.Guests
+                                      join token in context.Tokens on guest.ID equals token.GuestID into joined
+                                      from t in joined.DefaultIfEmpty()
+                                      select new GuestAudit()
+                                      {
+                                          ID = guest.ID,
+                                          Uid = t.Uid,
+                                          Title = guest.Prefix,
+                                          Name = guest.Name,
+                                          Surname = guest.Surname,
+                                          Position = guest.Role,
+                                          Organization = guest.Organization,
+                                      }).OrderBy(q => q.Name).ToList();
+
 
                             break;
                         }
@@ -338,7 +366,7 @@ namespace DataEntryApp
                                           Surname = guest.Surname,
                                           Position = guest.Role,
                                           Organization = guest.Organization,
-                                      }).ToList();
+                                      }).OrderBy(q => q.Name).ToList();
 
                             break;
                         }
@@ -357,7 +385,7 @@ namespace DataEntryApp
                                           Surname = guest.Surname,
                                           Position = guest.Role,
                                           Organization = guest.Organization,
-                                      }).ToList();
+                                      }).OrderBy(q => q.Name).ToList();
 
                             break;
                         }
@@ -365,8 +393,8 @@ namespace DataEntryApp
 
                 if (result.Count > 0)
                 {
-                    this.listView1.BeginUpdate();
-                    this.listView1.Items.Clear();
+                    this.Status_List.BeginUpdate();
+                    this.Status_List.Items.Clear();
 
                     result.All(delegate (GuestAudit audit)
                     {
@@ -379,14 +407,56 @@ namespace DataEntryApp
                         item.SubItems.Add(audit.Position);
                         item.SubItems.Add(audit.Organization);
 
-                        this.listView1.Items.Add(item);
+                        this.Status_List.Items.Add(item);
 
                         return true;
                     });
 
-                    this.listView1.EndUpdate();
+                    this.Status_List.EndUpdate();
+                }
+                else
+                {
+                    this.Status_List.BeginUpdate();
+                    this.Status_List.Items.Clear();
+                    this.Status_List.EndUpdate();
                 }
             }
+        }
+
+        private void Delete_Button_Click(object sender, EventArgs e)
+        {
+            if (this.Status_List.SelectedItems != null)
+            {
+                var item = this.Status_List.SelectedItems[0];
+
+                var uid = item.Text;
+
+                if (uid.Length > 0)
+                {
+                    string question = string.Format("{0} uid related to a quest will be deleted, are you sure?", uid);
+
+                    if (MessageBox.Show(question, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        using (var context = new EventEntities())
+                        {
+                            var existingRecord = context.Tokens.FirstOrDefault(q => q.Uid == uid);
+
+                            if (existingRecord != null)
+                            {
+                                context.Tokens.Remove(existingRecord);
+                                context.SaveChanges();
+
+                                PopulateStatusList();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Add_Button_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
