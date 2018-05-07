@@ -81,12 +81,19 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.Add_Special_Button = new System.Windows.Forms.Button();
+            this.Special_Uid_Box = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.Special_Level_Combo = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -241,6 +248,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 188);
             this.tabControl1.Name = "tabControl1";
@@ -261,9 +269,9 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(724, 284);
+            this.tabPage1.Size = new System.Drawing.Size(727, 284);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Add";
+            this.tabPage1.Text = "Add Guest";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -276,7 +284,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(724, 284);
+            this.tabPage2.Size = new System.Drawing.Size(727, 284);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "List";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -598,6 +606,69 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Total Guests:";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.Special_Level_Combo);
+            this.tabPage4.Controls.Add(this.Add_Special_Button);
+            this.tabPage4.Controls.Add(this.Special_Uid_Box);
+            this.tabPage4.Controls.Add(this.label13);
+            this.tabPage4.Controls.Add(this.label14);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(727, 284);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Crew/Protocol Cards";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // Add_Special_Button
+            // 
+            this.Add_Special_Button.Location = new System.Drawing.Point(181, 81);
+            this.Add_Special_Button.Name = "Add_Special_Button";
+            this.Add_Special_Button.Size = new System.Drawing.Size(75, 23);
+            this.Add_Special_Button.TabIndex = 9;
+            this.Add_Special_Button.Text = "Add";
+            this.Add_Special_Button.UseVisualStyleBackColor = true;
+            this.Add_Special_Button.Click += new System.EventHandler(this.Add_Special_Button_Click);
+            // 
+            // Special_Uid_Box
+            // 
+            this.Special_Uid_Box.Enabled = false;
+            this.Special_Uid_Box.Location = new System.Drawing.Point(92, 14);
+            this.Special_Uid_Box.Name = "Special_Uid_Box";
+            this.Special_Uid_Box.Size = new System.Drawing.Size(164, 20);
+            this.Special_Uid_Box.TabIndex = 7;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(50, 43);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(36, 13);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "Level:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(60, 17);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(26, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Uid:";
+            // 
+            // Special_Level_Combo
+            // 
+            this.Special_Level_Combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Special_Level_Combo.FormattingEnabled = true;
+            this.Special_Level_Combo.Items.AddRange(new object[] {
+            "Crew",
+            "Protocol"});
+            this.Special_Level_Combo.Location = new System.Drawing.Point(92, 40);
+            this.Special_Level_Combo.Name = "Special_Level_Combo";
+            this.Special_Level_Combo.Size = new System.Drawing.Size(164, 21);
+            this.Special_Level_Combo.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -610,7 +681,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DataEntryApp - v0.0.7";
+            this.Text = "DataEntryApp - v0.0.8";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -623,6 +694,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -682,6 +755,12 @@
         private System.Windows.Forms.TextBox Temp_Uid_Box;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ComboBox Special_Level_Combo;
+        private System.Windows.Forms.Button Add_Special_Button;
+        private System.Windows.Forms.TextBox Special_Uid_Box;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }
 

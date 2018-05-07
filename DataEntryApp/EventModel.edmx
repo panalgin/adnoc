@@ -17,6 +17,14 @@
           <Property Name="Level" Type="nvarchar" MaxLength="50" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="SpecialCards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Uid" Type="nvarchar" MaxLength="50" />
+          <Property Name="Level" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TemporaryCards">
           <Key>
             <PropertyRef Name="ID" />
@@ -35,6 +43,7 @@
         </EntityType>
         <EntityContainer Name="EventModelStoreContainer">
           <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialCards" EntityType="Self.SpecialCards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TemporaryCards" EntityType="Self.TemporaryCards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tokens" EntityType="Self.Tokens" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -46,6 +55,7 @@
           <EntitySet Name="Tokens" EntityType="EventModel.Token" />
           <EntitySet Name="Guests" EntityType="EventModel.Guest" />
           <EntitySet Name="TemporaryCards" EntityType="EventModel.TemporaryCard" />
+          <EntitySet Name="SpecialCards" EntityType="EventModel.SpecialCard" />
         </EntityContainer>
         <EntityType Name="Token">
           <Key>
@@ -74,6 +84,14 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Uid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Serial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SpecialCard">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Uid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -107,6 +125,15 @@
             <EntityTypeMapping TypeName="EventModel.TemporaryCard">
               <MappingFragment StoreEntitySet="TemporaryCards">
                 <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialCards">
+            <EntityTypeMapping TypeName="EventModel.SpecialCard">
+              <MappingFragment StoreEntitySet="SpecialCards">
+                <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Uid" ColumnName="Uid" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

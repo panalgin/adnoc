@@ -108,6 +108,8 @@ namespace DataEntryApp
             this.Username_Box.Text = set.Username;
             this.Password_Box.Text = set.Password;
 
+            this.Special_Level_Combo.SelectedIndex = 0;
+
             PcscReader.Initialize();
             PcscReader.CardScanned += PcscReader_CardScanned;
             PcscReader.Error += PcscReader_Error;
@@ -136,7 +138,9 @@ namespace DataEntryApp
             this.Assign_Button.Enabled = false;
             this.Cancel_Button.Enabled = false;
             this.Temp_Uid_Box.Text = "";
+            this.Special_Uid_Box.Text = "";
             this.Search_Box.Text = "";
+
 
             this.Focus();
         }
@@ -148,7 +152,9 @@ namespace DataEntryApp
             using (var context = new EventEntities())
             {
                 var exists = context.Tokens.FirstOrDefault(q => q.Uid == uid);
-
+                var exists2 = context.TemporaryCards.FirstOrDefault(q => q.Uid == uid);
+                var exists3 = context.SpecialCards.FirstOrDefault(q => q.Uid == uid);
+                
                 if (exists != null)
                 {
                     var guest = context.Guests.FirstOrDefault(q => q.ID == exists.GuestID);
@@ -157,10 +163,23 @@ namespace DataEntryApp
                         MessageBox.Show(string.Format("This card already belongs to {0}.", guest.FullName), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
+                else if (exists2 != null)
+                {
+                    string message = string.Format("This card [{0}] is already registered as a temporary card with a serial code of: {1}", exists2.Uid, exists2.Serial);
+
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (exists3 != null)
+                {
+                    string message = string.Format("This card [{0}] is already registered as a special card with {1} access level.", exists3.Uid, exists3.Level);
+
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else
                 {
                     this.Uid_Box.Text = uid;
                     this.Temp_Uid_Box.Text = uid;
+                    this.Special_Uid_Box.Text = uid;
                     this.Search_Box.Enabled = true;
                     this.Cancel_Button.Enabled = true;
                     this.Search_Box.Focus();
@@ -461,6 +480,11 @@ namespace DataEntryApp
             {
 
             }
+        }
+
+        private void Add_Special_Button_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

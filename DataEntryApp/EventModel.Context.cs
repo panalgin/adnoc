@@ -19,19 +19,7 @@ namespace DataEntryApp
         public EventEntities()
             : base("name=EventEntities")
         {
-
-            Settings.Default.Reload();
-
-            var server = Settings.Default.Server;
-            var catalog = Settings.Default.Catalog;
-            var user = Settings.Default.Username;
-            var password = Settings.Default.Password;
-
-
-            this.Database.Connection.ConnectionString = this.Database.Connection.ConnectionString.Replace("{Server}", server).
-                Replace("{Catalog}", catalog).
-                Replace("{User}", user).
-                Replace("{Password}", password);
+            Utility.ConfigureConnectionString(this);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -42,5 +30,6 @@ namespace DataEntryApp
         public virtual DbSet<Token> Tokens { get; set; }
         public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<TemporaryCard> TemporaryCards { get; set; }
+        public virtual DbSet<SpecialCard> SpecialCards { get; set; }
     }
 }

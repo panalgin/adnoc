@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="EventModel.Token" Width="1.5" PointX="2.5" PointY="0.75" />
         <EntityTypeShape EntityType="EventModel.Guest" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="EventModel.TemporaryCard" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EventModel.SpecialCard" Width="1.5" PointX="4.5" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
