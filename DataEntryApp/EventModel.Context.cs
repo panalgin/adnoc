@@ -9,17 +9,15 @@
 
 namespace DataEntryApp
 {
-    using Properties;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class EventEntities : DbContext
     {
         public EventEntities()
             : base("name=EventEntities")
         {
-            Utility.ConfigureConnectionString(this);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,5 +29,6 @@ namespace DataEntryApp
         public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<TemporaryCard> TemporaryCards { get; set; }
         public virtual DbSet<SpecialCard> SpecialCards { get; set; }
+        public virtual DbSet<MediaCard> MediaCards { get; set; }
     }
 }

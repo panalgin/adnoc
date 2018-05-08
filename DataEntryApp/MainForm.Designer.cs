@@ -58,8 +58,19 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.Delete_Special_Button = new System.Windows.Forms.Button();
+            this.Special_List = new System.Windows.Forms.ListView();
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Special_Level_Combo = new System.Windows.Forms.ComboBox();
+            this.Add_Special_Button = new System.Windows.Forms.Button();
+            this.Special_Uid_Box = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.Delete_Temporary_Button = new System.Windows.Forms.Button();
+            this.Temporary_List = new System.Windows.Forms.ListView();
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Add_Button = new System.Windows.Forms.Button();
@@ -81,19 +92,30 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.Add_Special_Button = new System.Windows.Forms.Button();
-            this.Special_Uid_Box = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.Special_Level_Combo = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.Crew_Cards_Label = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.Protocol_Cards_Label = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.Media_List = new System.Windows.Forms.ListView();
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Search_Media_Box = new System.Windows.Forms.TextBox();
+            this.Media_Uid_Box = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -250,6 +272,8 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(12, 188);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -388,9 +412,115 @@
             this.columnHeader11.Text = "Organization";
             this.columnHeader11.Width = 172;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.Delete_Special_Button);
+            this.tabPage4.Controls.Add(this.Special_List);
+            this.tabPage4.Controls.Add(this.Special_Level_Combo);
+            this.tabPage4.Controls.Add(this.Add_Special_Button);
+            this.tabPage4.Controls.Add(this.Special_Uid_Box);
+            this.tabPage4.Controls.Add(this.label13);
+            this.tabPage4.Controls.Add(this.label14);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(727, 284);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Crew/Protocol Cards";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // Delete_Special_Button
+            // 
+            this.Delete_Special_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Delete_Special_Button.Enabled = false;
+            this.Delete_Special_Button.Location = new System.Drawing.Point(646, 14);
+            this.Delete_Special_Button.Name = "Delete_Special_Button";
+            this.Delete_Special_Button.Size = new System.Drawing.Size(75, 23);
+            this.Delete_Special_Button.TabIndex = 12;
+            this.Delete_Special_Button.Text = "Delete";
+            this.Delete_Special_Button.UseVisualStyleBackColor = true;
+            this.Delete_Special_Button.Click += new System.EventHandler(this.Delete_Special_Button_Click);
+            // 
+            // Special_List
+            // 
+            this.Special_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Special_List.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader14,
+            this.columnHeader15});
+            this.Special_List.FullRowSelect = true;
+            this.Special_List.GridLines = true;
+            this.Special_List.Location = new System.Drawing.Point(262, 14);
+            this.Special_List.Name = "Special_List";
+            this.Special_List.Size = new System.Drawing.Size(378, 267);
+            this.Special_List.TabIndex = 11;
+            this.Special_List.UseCompatibleStateImageBehavior = false;
+            this.Special_List.View = System.Windows.Forms.View.Details;
+            this.Special_List.SelectedIndexChanged += new System.EventHandler(this.Special_List_SelectedIndexChanged);
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Uid";
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Level";
+            this.columnHeader15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader15.Width = 172;
+            // 
+            // Special_Level_Combo
+            // 
+            this.Special_Level_Combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Special_Level_Combo.FormattingEnabled = true;
+            this.Special_Level_Combo.Items.AddRange(new object[] {
+            "Crew",
+            "Protocol"});
+            this.Special_Level_Combo.Location = new System.Drawing.Point(92, 40);
+            this.Special_Level_Combo.Name = "Special_Level_Combo";
+            this.Special_Level_Combo.Size = new System.Drawing.Size(164, 21);
+            this.Special_Level_Combo.TabIndex = 10;
+            // 
+            // Add_Special_Button
+            // 
+            this.Add_Special_Button.Location = new System.Drawing.Point(181, 81);
+            this.Add_Special_Button.Name = "Add_Special_Button";
+            this.Add_Special_Button.Size = new System.Drawing.Size(75, 23);
+            this.Add_Special_Button.TabIndex = 9;
+            this.Add_Special_Button.Text = "Add";
+            this.Add_Special_Button.UseVisualStyleBackColor = true;
+            this.Add_Special_Button.Click += new System.EventHandler(this.Add_Special_Button_Click);
+            // 
+            // Special_Uid_Box
+            // 
+            this.Special_Uid_Box.Enabled = false;
+            this.Special_Uid_Box.Location = new System.Drawing.Point(92, 14);
+            this.Special_Uid_Box.Name = "Special_Uid_Box";
+            this.Special_Uid_Box.Size = new System.Drawing.Size(164, 20);
+            this.Special_Uid_Box.TabIndex = 7;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(50, 43);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(36, 13);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "Level:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(60, 17);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(26, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Uid:";
+            // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.listView1);
+            this.tabPage3.Controls.Add(this.Delete_Temporary_Button);
+            this.tabPage3.Controls.Add(this.Temporary_List);
             this.tabPage3.Controls.Add(this.Add_Button);
             this.tabPage3.Controls.Add(this.Serial_Box);
             this.tabPage3.Controls.Add(this.Temp_Uid_Box);
@@ -404,22 +534,35 @@
             this.tabPage3.Text = "Temporary Cards";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // Delete_Temporary_Button
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Delete_Temporary_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Delete_Temporary_Button.Enabled = false;
+            this.Delete_Temporary_Button.Location = new System.Drawing.Point(646, 12);
+            this.Delete_Temporary_Button.Name = "Delete_Temporary_Button";
+            this.Delete_Temporary_Button.Size = new System.Drawing.Size(75, 23);
+            this.Delete_Temporary_Button.TabIndex = 13;
+            this.Delete_Temporary_Button.Text = "Delete";
+            this.Delete_Temporary_Button.UseVisualStyleBackColor = true;
+            this.Delete_Temporary_Button.Click += new System.EventHandler(this.Delete_Temporary_Button_Click);
+            // 
+            // Temporary_List
+            // 
+            this.Temporary_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Temporary_List.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader12,
             this.columnHeader13});
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(262, 14);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(459, 264);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.Temporary_List.FullRowSelect = true;
+            this.Temporary_List.GridLines = true;
+            this.Temporary_List.Location = new System.Drawing.Point(262, 14);
+            this.Temporary_List.Name = "Temporary_List";
+            this.Temporary_List.Size = new System.Drawing.Size(378, 264);
+            this.Temporary_List.TabIndex = 5;
+            this.Temporary_List.UseCompatibleStateImageBehavior = false;
+            this.Temporary_List.View = System.Windows.Forms.View.Details;
+            this.Temporary_List.SelectedIndexChanged += new System.EventHandler(this.Temporary_List_SelectedIndexChanged);
             // 
             // columnHeader12
             // 
@@ -542,6 +685,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label19);
+            this.groupBox2.Controls.Add(this.label18);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.Protocol_Cards_Label);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.Crew_Cards_Label);
+            this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.Assigned_Guests_Label);
             this.groupBox2.Controls.Add(this.Unassigned_Guests_Label);
             this.groupBox2.Controls.Add(this.Total_Guests_Label);
@@ -606,68 +756,152 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Total Guests:";
             // 
-            // tabPage4
+            // label15
             // 
-            this.tabPage4.Controls.Add(this.Special_Level_Combo);
-            this.tabPage4.Controls.Add(this.Add_Special_Button);
-            this.tabPage4.Controls.Add(this.Special_Uid_Box);
-            this.tabPage4.Controls.Add(this.label13);
-            this.tabPage4.Controls.Add(this.label14);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(727, 284);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Crew/Protocol Cards";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(59, 100);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(64, 13);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Crew Cards:";
             // 
-            // Add_Special_Button
+            // Crew_Cards_Label
             // 
-            this.Add_Special_Button.Location = new System.Drawing.Point(181, 81);
-            this.Add_Special_Button.Name = "Add_Special_Button";
-            this.Add_Special_Button.Size = new System.Drawing.Size(75, 23);
-            this.Add_Special_Button.TabIndex = 9;
-            this.Add_Special_Button.Text = "Add";
-            this.Add_Special_Button.UseVisualStyleBackColor = true;
-            this.Add_Special_Button.Click += new System.EventHandler(this.Add_Special_Button_Click);
+            this.Crew_Cards_Label.AutoSize = true;
+            this.Crew_Cards_Label.Location = new System.Drawing.Point(129, 100);
+            this.Crew_Cards_Label.Name = "Crew_Cards_Label";
+            this.Crew_Cards_Label.Size = new System.Drawing.Size(0, 13);
+            this.Crew_Cards_Label.TabIndex = 7;
             // 
-            // Special_Uid_Box
+            // label16
             // 
-            this.Special_Uid_Box.Enabled = false;
-            this.Special_Uid_Box.Location = new System.Drawing.Point(92, 14);
-            this.Special_Uid_Box.Name = "Special_Uid_Box";
-            this.Special_Uid_Box.Size = new System.Drawing.Size(164, 20);
-            this.Special_Uid_Box.TabIndex = 7;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(44, 126);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(79, 13);
+            this.label16.TabIndex = 8;
+            this.label16.Text = "Protocol Cards:";
             // 
-            // label13
+            // Protocol_Cards_Label
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(50, 43);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(36, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Level:";
+            this.Protocol_Cards_Label.AutoSize = true;
+            this.Protocol_Cards_Label.Location = new System.Drawing.Point(129, 126);
+            this.Protocol_Cards_Label.Name = "Protocol_Cards_Label";
+            this.Protocol_Cards_Label.Size = new System.Drawing.Size(0, 13);
+            this.Protocol_Cards_Label.TabIndex = 9;
             // 
-            // label14
+            // label17
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(60, 17);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(26, 13);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "Uid:";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(258, 19);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(69, 13);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "Media Cards:";
             // 
-            // Special_Level_Combo
+            // label18
             // 
-            this.Special_Level_Combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Special_Level_Combo.FormattingEnabled = true;
-            this.Special_Level_Combo.Items.AddRange(new object[] {
-            "Crew",
-            "Protocol"});
-            this.Special_Level_Combo.Location = new System.Drawing.Point(92, 40);
-            this.Special_Level_Combo.Name = "Special_Level_Combo";
-            this.Special_Level_Combo.Size = new System.Drawing.Size(164, 21);
-            this.Special_Level_Combo.TabIndex = 10;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(272, 45);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(55, 13);
+            this.label18.TabIndex = 11;
+            this.label18.Text = "Vip Cards:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(237, 71);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(90, 13);
+            this.label19.TabIndex = 12;
+            this.label19.Text = "Temporary Cards:";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.Media_List);
+            this.tabPage5.Controls.Add(this.Search_Media_Box);
+            this.tabPage5.Controls.Add(this.Media_Uid_Box);
+            this.tabPage5.Controls.Add(this.label20);
+            this.tabPage5.Controls.Add(this.label21);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(727, 284);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Media Cards";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(727, 284);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Vip Cards";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // Media_List
+            // 
+            this.Media_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Media_List.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader16,
+            this.columnHeader17});
+            this.Media_List.FullRowSelect = true;
+            this.Media_List.GridLines = true;
+            this.Media_List.Location = new System.Drawing.Point(262, 14);
+            this.Media_List.Name = "Media_List";
+            this.Media_List.Size = new System.Drawing.Size(459, 264);
+            this.Media_List.TabIndex = 11;
+            this.Media_List.UseCompatibleStateImageBehavior = false;
+            this.Media_List.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Uid";
+            this.columnHeader16.Width = 120;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "Serial";
+            this.columnHeader17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader17.Width = 168;
+            // 
+            // Search_Media_Box
+            // 
+            this.Search_Media_Box.Location = new System.Drawing.Point(92, 40);
+            this.Search_Media_Box.Name = "Search_Media_Box";
+            this.Search_Media_Box.Size = new System.Drawing.Size(164, 20);
+            this.Search_Media_Box.TabIndex = 9;
+            // 
+            // Media_Uid_Box
+            // 
+            this.Media_Uid_Box.Enabled = false;
+            this.Media_Uid_Box.Location = new System.Drawing.Point(92, 14);
+            this.Media_Uid_Box.Name = "Media_Uid_Box";
+            this.Media_Uid_Box.Size = new System.Drawing.Size(164, 20);
+            this.Media_Uid_Box.TabIndex = 8;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(48, 43);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(38, 13);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "Name:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(60, 17);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(26, 13);
+            this.label21.TabIndex = 6;
+            this.label21.Text = "Uid:";
             // 
             // MainForm
             // 
@@ -688,14 +922,16 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -747,7 +983,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView Temporary_List;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.Button Add_Button;
@@ -761,6 +997,27 @@
         private System.Windows.Forms.TextBox Special_Uid_Box;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button Delete_Special_Button;
+        private System.Windows.Forms.ListView Special_List;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.Button Delete_Temporary_Button;
+        private System.Windows.Forms.Label Protocol_Cards_Label;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label Crew_Cards_Label;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.ListView Media_List;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.TextBox Search_Media_Box;
+        private System.Windows.Forms.TextBox Media_Uid_Box;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
     }
 }
 

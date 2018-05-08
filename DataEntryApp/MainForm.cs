@@ -45,6 +45,8 @@ namespace DataEntryApp
 
                     CalculateMetrics();
                     PopulateStatusList();
+                    PopulateSpecialList();
+                    PopulateTemporaryList();
                 }
             }
             catch (Exception ex)
@@ -154,7 +156,7 @@ namespace DataEntryApp
                 var exists = context.Tokens.FirstOrDefault(q => q.Uid == uid);
                 var exists2 = context.TemporaryCards.FirstOrDefault(q => q.Uid == uid);
                 var exists3 = context.SpecialCards.FirstOrDefault(q => q.Uid == uid);
-                
+
                 if (exists != null)
                 {
                     var guest = context.Guests.FirstOrDefault(q => q.ID == exists.GuestID);
@@ -264,9 +266,14 @@ namespace DataEntryApp
                                 where context.Tokens.Any(q => q.GuestID == guest.ID)
                                 select guest.ID).ToList().Count();
 
+                var crew = context.SpecialCards.Where(q => q.Level == "Crew").Count();
+                var protocol = context.SpecialCards.Where(q => q.Level == "Protocol").Count();
+
                 this.Total_Guests_Label.Text = totalGuests.ToString();
                 this.Unassigned_Guests_Label.Text = unassigned.ToString();
                 this.Assigned_Guests_Label.Text = assigned.ToString();
+                this.Crew_Cards_Label.Text = crew.ToString();
+                this.Protocol_Cards_Label.Text = protocol.ToString();
             }
         }
 
@@ -442,6 +449,57 @@ namespace DataEntryApp
             }
         }
 
+        void PopulateSpecialList()
+        {
+            this.Special_List.BeginUpdate();
+            this.Special_List.Items.Clear();
+
+            using (var context = new EventEntities())
+            {
+                var specialCards = context.SpecialCards.OrderByDescending(q => q.ID).ToList();
+
+                specialCards.All(delegate (SpecialCard card)
+                {
+                    var item = new ListViewItem();
+                    item.Tag = card.ID;
+                    item.Text = card.Uid;
+                    item.SubItems.Add(card.Level);
+
+                    this.Special_List.Items.Add(item);
+
+                    return true;
+                });
+            }
+
+            this.Special_List.EndUpdate();
+        }
+
+        private void PopulateTemporaryList()
+        {
+            this.Temporary_List.BeginUpdate();
+            this.Temporary_List.Items.Clear();
+
+            using (var context = new EventEntities())
+            {
+                var cards = context.TemporaryCards.ToList();
+
+                cards.All(delegate (TemporaryCard card)
+                {
+                    var item = new ListViewItem();
+                    item.Tag = card.ID;
+                    item.Text = card.Uid;
+                    item.SubItems.Add(card.Serial);
+
+                    this.Temporary_List.Items.Add(item);
+
+
+                    return true;
+                });
+            }
+
+            this.Temporary_List.EndUpdate();
+        }
+
         private void Delete_Button_Click(object sender, EventArgs e)
         {
             if (this.Status_List.SelectedItems != null)
@@ -478,13 +536,112 @@ namespace DataEntryApp
             if (!string.IsNullOrEmpty(this.Temp_Uid_Box.Text)
                 && !string.IsNullOrEmpty(this.Serial_Box.Text))
             {
+                using (var context = new EventEntities())
+                {
+                    var card = new TemporaryCard()
+                    {
+                        Uid = this.Temp_Uid_Box.Text,
+                        Serial = this.Serial_Box.Text
+                    };
 
+                    context.TemporaryCards.Add(card);
+                    context.SaveChanges();
+
+                    ClearInput();
+                    PopulateTemporaryList();
+                }
             }
         }
 
         private void Add_Special_Button_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(this.Special_Uid_Box.Text) && this.Special_Uid_Box.Text.Length > 0)
+            {
+                using (var context = new EventEntities())
+                {
+                    var card = new SpecialCard()
+                    {
+                        Level = this.Special_Level_Combo.SelectedItem.ToString(),
+                        Uid = this.Special_Uid_Box.Text
+                    };
 
+                    context.SpecialCards.Add(card);
+                    context.SaveChanges();
+
+                    ClearInput();
+                    PopulateSpecialList();
+                    CalculateMetrics();
+                }
+            }
+        }
+
+        private void Special_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Special_List.SelectedItems != null && this.Special_List.SelectedItems.Count > 0)
+            {
+                this.Delete_Special_Button.Enabled = true;
+            }
+            else
+                this.Delete_Special_Button.Enabled = false;
+        }
+
+        private void Delete_Special_Button_Click(object sender, EventArgs e)
+        {
+            if (this.Special_List.SelectedItems != null && this.Special_List.SelectedItems.Count > 0)
+            {
+                var item = this.Special_List.SelectedItems[0];
+
+                var id = Convert.ToInt32(item.Tag);
+
+                using (var context = new EventEntities())
+                {
+                    var exists = context.SpecialCards.FirstOrDefault(q => q.ID == id);
+
+                    if (exists != null)
+                    {
+                        context.SpecialCards.Remove(exists);
+                        context.SaveChanges();
+
+                        PopulateSpecialList();
+                    }
+                }
+            }
+        }
+
+        private void Delete_Temporary_Button_Click(object sender, EventArgs e)
+        {
+            if (this.Temporary_List.SelectedItems != null &&
+                this.Temporary_List.SelectedItems.Count > 0)
+            {
+                var item = this.Temporary_List.SelectedItems[0];
+                var id = Convert.ToInt32(item.Tag);
+
+                using(var context = new EventEntities())
+                {
+                    var existing = context.TemporaryCards.FirstOrDefault(q => q.ID == id);
+
+                    if (existing != null)
+                    {
+                        context.TemporaryCards.Remove(existing);
+                        context.SaveChanges();
+
+                        ClearInput();
+                    }
+                }
+
+                PopulateTemporaryList();
+            }
+        }
+
+        private void Temporary_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Temporary_List.SelectedItems != null &&
+                this.Temporary_List.SelectedItems.Count > 0)
+            {
+                this.Delete_Temporary_Button.Enabled = true;
+            }
+            else
+                this.Delete_Temporary_Button.Enabled = false;
         }
     }
 }
