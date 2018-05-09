@@ -22,5 +22,6 @@ namespace DataEntryApp
         public string Position { get; set; }
         public string Company { get; set; }
         public string Level { get; set; }
+        public string Uid { get; set; }
     }
 }

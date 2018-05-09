@@ -146,6 +146,10 @@ namespace DataEntryApp
             this.Media_List.Items.Clear();
             this.Search_Media_Box.Text = "";
 
+            this.Vip_Uid_Box.Text = "";
+            this.Vip_List.Items.Clear();
+            this.Search_Vip_Box.Text = "";
+
 
             this.Focus();
         }
@@ -160,7 +164,7 @@ namespace DataEntryApp
                 var exists2 = context.TemporaryCards.FirstOrDefault(q => q.Uid == uid);
                 var exists3 = context.SpecialCards.FirstOrDefault(q => q.Uid == uid);
                 var exists4 = context.MediaCards.FirstOrDefault(q => q.Uid == uid);
-                //var exists5 = context.VipCards.FirstOrDefault(q => q)
+                var exists5 = context.VipCards.FirstOrDefault(q => q.Uid == uid);
 
                 if (exists != null)
                 {
@@ -188,17 +192,27 @@ namespace DataEntryApp
 
                     MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (exists5 != null)
+                {
+                    string message = string.Format("This card [{0}] is already registered as a vip/vvip card to {1} {2}", exists5.Uid, exists5.Name, exists5.Surname);
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else
                 {
                     this.Uid_Box.Text = uid;
                     this.Temp_Uid_Box.Text = uid;
                     this.Special_Uid_Box.Text = uid;
                     this.Media_Uid_Box.Text = uid;
+                    this.Vip_Uid_Box.Text = uid;
 
+                    if (tabControl1.SelectedTab == tabPage6)
+                        Search_Vip_Box.Focus();
+                    else
+                        this.Search_Box.Focus();
 
                     this.Search_Box.Enabled = true;
                     this.Cancel_Button.Enabled = true;
-                    this.Search_Box.Focus();
+                    
 
                     this.Results_View.Enabled = true;
                 }
@@ -283,6 +297,9 @@ namespace DataEntryApp
                 var crew = context.SpecialCards.Where(q => q.Level == "Crew").Count();
                 var protocol = context.SpecialCards.Where(q => q.Level == "Protocol").Count();
                 var media = context.MediaCards.Where(q => q.Uid != null && q.Uid.Length > 0).Count();
+                var vvip = context.VipCards.Where(q => q.Uid != null && q.Uid.Length > 0 && q.Level == "VVIP").Count();
+                var vip = context.VipCards.Where(q => q.Uid != null && q.Uid.Length > 0 && q.Level == "VIP").Count();
+                var temporary = context.TemporaryCards.Count();
 
                 this.Total_Guests_Label.Text = totalGuests.ToString();
                 this.Unassigned_Guests_Label.Text = unassigned.ToString();
@@ -290,6 +307,9 @@ namespace DataEntryApp
                 this.Crew_Cards_Label.Text = crew.ToString();
                 this.Protocol_Cards_Label.Text = protocol.ToString();
                 this.Media_Cards_Label.Text = media.ToString();
+                this.VVIP_Cards_Label.Text = vvip.ToString();
+                this.VIP_Cards_Label.Text = vip.ToString();
+                this.Temporary_Cards_Label.Text = temporary.ToString();
             }
         }
 
@@ -746,9 +766,96 @@ namespace DataEntryApp
             }
         }
 
-        private void Media_List_SelectedIndexChanged(object sender, EventArgs e)
+        private void AssignVipCard(string uid, int cardId)
         {
+            if (uid.Length > 0)
+            {
+                using (var context = new EventEntities())
+                {
+                    var card = context.VipCards.FirstOrDefault(q => q.ID == cardId);
 
+                    if (card != null)
+                    {
+                        card.Uid = uid;
+                        context.SaveChanges();
+
+                        ClearInput();
+                        CalculateMetrics();
+                    }
+
+                }
+            }
+        }
+
+        private void Search_Vip_Box_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Search_Vip_Box.Text.Length > 0)
+            {
+                var key = this.Search_Vip_Box.Text.ToUpper();
+
+                using (var context = new EventEntities())
+                {
+                    var result = (from m in context.VipCards
+                                  where (m.Name.ToUpper() + " " + m.MiddleName.ToUpper() + " " + m.Surname.ToUpper()).Contains(key) 
+                                  && m.Uid == null
+                                  select m).ToList();
+
+                    if (result.Count > 0)
+                    {
+                        this.Vip_List.BeginUpdate();
+                        this.Vip_List.Items.Clear();
+
+                        result.All(delegate (VipCard card)
+                        {
+                            var item = new ListViewItem()
+                            {
+                                Text = card.Level,
+                            };
+
+                            item.SubItems.Add(card.Title);
+                            item.SubItems.Add(card.Name);
+                            
+                            item.SubItems.Add(card.Surname);
+                            item.SubItems.Add(card.Position);
+                            item.SubItems.Add(card.Company);
+                            item.Tag = card.ID;
+
+                            this.Vip_List.Items.Add(item);
+
+                            return true;
+                        });
+
+                        this.Vip_List.EndUpdate();
+                    }
+                    else
+                        this.Vip_List.Items.Clear();
+                }
+            }
+        }
+
+        private void Vip_List_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (Vip_List.Enabled && Vip_List.Items != null && Vip_List.Items.Count > 0)
+            {
+                ListViewHitTestInfo info = this.Vip_List.HitTest(e.X, e.Y);
+                ListViewItem item = info.Item;
+
+                if (item != null && !string.IsNullOrEmpty(this.Vip_Uid_Box.Text))
+                {
+                    var uid = this.Vip_Uid_Box.Text;
+                    var name = item.SubItems[2].Text;
+                    var surname = item.SubItems[3].Text;
+
+                    string message = string.Format("{0} uid will be assigned to a vip/vvip \"{1} {2}\", are you sure?", uid, name, surname);
+
+                    if (MessageBox.Show(message, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        var cardId = Convert.ToInt32(item.Tag);
+
+                        AssignVipCard(uid, cardId);
+                    }
+                }
+            }
         }
     }
 }

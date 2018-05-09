@@ -62,6 +62,7 @@
           <Property Name="Position" Type="nvarchar" MaxLength="150" />
           <Property Name="Company" Type="nvarchar" MaxLength="150" />
           <Property Name="Level" Type="nvarchar" MaxLength="50" />
+          <Property Name="Uid" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="EventModelStoreContainer">
           <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
@@ -140,6 +141,7 @@
           <Property Name="Position" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Company" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -200,6 +202,7 @@
           <EntitySetMapping Name="VipCards">
             <EntityTypeMapping TypeName="EventModel.VipCard">
               <MappingFragment StoreEntitySet="VipCards">
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="Position" ColumnName="Position" />

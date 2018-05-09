@@ -87,6 +87,17 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.Vip_List = new System.Windows.Forms.ListView();
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Search_Vip_Box = new System.Windows.Forms.TextBox();
+            this.Vip_Uid_Box = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Password_Box = new System.Windows.Forms.TextBox();
             this.Username_Box = new System.Windows.Forms.TextBox();
@@ -95,6 +106,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.VIP_Cards_Label = new System.Windows.Forms.Label();
+            this.VVIP_Cards_Label = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.Media_Cards_Label = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -109,17 +123,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.Vip_List = new System.Windows.Forms.ListView();
-            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Search_Vip_Box = new System.Windows.Forms.TextBox();
-            this.Vip_Uid_Box = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Temporary_Cards_Label = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -661,7 +665,6 @@
             this.Media_List.TabIndex = 11;
             this.Media_List.UseCompatibleStateImageBehavior = false;
             this.Media_List.View = System.Windows.Forms.View.Details;
-            this.Media_List.SelectedIndexChanged += new System.EventHandler(this.Media_List_SelectedIndexChanged);
             this.Media_List.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Media_List_MouseDoubleClick);
             // 
             // columnHeader16
@@ -723,6 +726,93 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Vip Cards";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // Vip_List
+            // 
+            this.Vip_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Vip_List.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader23,
+            this.columnHeader18,
+            this.columnHeader22,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21});
+            this.Vip_List.FullRowSelect = true;
+            this.Vip_List.GridLines = true;
+            this.Vip_List.Location = new System.Drawing.Point(262, 14);
+            this.Vip_List.Name = "Vip_List";
+            this.Vip_List.Size = new System.Drawing.Size(459, 264);
+            this.Vip_List.TabIndex = 16;
+            this.Vip_List.UseCompatibleStateImageBehavior = false;
+            this.Vip_List.View = System.Windows.Forms.View.Details;
+            this.Vip_List.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Vip_List_MouseDoubleClick);
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "Level";
+            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader23.Width = 51;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Title";
+            this.columnHeader18.Width = 34;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Name";
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Surname";
+            this.columnHeader19.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader19.Width = 129;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Position";
+            this.columnHeader20.Width = 120;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Company";
+            this.columnHeader21.Width = 98;
+            // 
+            // Search_Vip_Box
+            // 
+            this.Search_Vip_Box.Location = new System.Drawing.Point(92, 40);
+            this.Search_Vip_Box.Name = "Search_Vip_Box";
+            this.Search_Vip_Box.Size = new System.Drawing.Size(164, 20);
+            this.Search_Vip_Box.TabIndex = 15;
+            this.Search_Vip_Box.TextChanged += new System.EventHandler(this.Search_Vip_Box_TextChanged);
+            // 
+            // Vip_Uid_Box
+            // 
+            this.Vip_Uid_Box.Enabled = false;
+            this.Vip_Uid_Box.Location = new System.Drawing.Point(92, 14);
+            this.Vip_Uid_Box.Name = "Vip_Uid_Box";
+            this.Vip_Uid_Box.Size = new System.Drawing.Size(164, 20);
+            this.Vip_Uid_Box.TabIndex = 14;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(48, 43);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(38, 13);
+            this.label22.TabIndex = 13;
+            this.label22.Text = "Name:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(60, 17);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(26, 13);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "Uid:";
             // 
             // groupBox1
             // 
@@ -792,6 +882,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Temporary_Cards_Label);
+            this.groupBox2.Controls.Add(this.VIP_Cards_Label);
+            this.groupBox2.Controls.Add(this.VVIP_Cards_Label);
+            this.groupBox2.Controls.Add(this.label24);
             this.groupBox2.Controls.Add(this.Media_Cards_Label);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label18);
@@ -813,6 +907,31 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Statistics";
             // 
+            // VIP_Cards_Label
+            // 
+            this.VIP_Cards_Label.AutoSize = true;
+            this.VIP_Cards_Label.Location = new System.Drawing.Point(333, 104);
+            this.VIP_Cards_Label.Name = "VIP_Cards_Label";
+            this.VIP_Cards_Label.Size = new System.Drawing.Size(0, 13);
+            this.VIP_Cards_Label.TabIndex = 16;
+            // 
+            // VVIP_Cards_Label
+            // 
+            this.VVIP_Cards_Label.AutoSize = true;
+            this.VVIP_Cards_Label.Location = new System.Drawing.Point(333, 74);
+            this.VVIP_Cards_Label.Name = "VVIP_Cards_Label";
+            this.VVIP_Cards_Label.Size = new System.Drawing.Size(0, 13);
+            this.VVIP_Cards_Label.TabIndex = 15;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(263, 74);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(64, 13);
+            this.label24.TabIndex = 14;
+            this.label24.Text = "VVIP Cards:";
+            // 
             // Media_Cards_Label
             // 
             this.Media_Cards_Label.AutoSize = true;
@@ -824,7 +943,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(237, 71);
+            this.label19.Location = new System.Drawing.Point(237, 45);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(90, 13);
             this.label19.TabIndex = 12;
@@ -833,11 +952,11 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(272, 45);
+            this.label18.Location = new System.Drawing.Point(270, 104);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(55, 13);
+            this.label18.Size = new System.Drawing.Size(57, 13);
             this.label18.TabIndex = 11;
-            this.label18.Text = "Vip Cards:";
+            this.label18.Text = "VIP Cards:";
             // 
             // label17
             // 
@@ -933,90 +1052,13 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Total Guests:";
             // 
-            // Vip_List
+            // Temporary_Cards_Label
             // 
-            this.Vip_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Vip_List.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader18,
-            this.columnHeader23,
-            this.columnHeader22,
-            this.columnHeader19,
-            this.columnHeader20,
-            this.columnHeader21});
-            this.Vip_List.FullRowSelect = true;
-            this.Vip_List.GridLines = true;
-            this.Vip_List.Location = new System.Drawing.Point(262, 14);
-            this.Vip_List.Name = "Vip_List";
-            this.Vip_List.Size = new System.Drawing.Size(459, 264);
-            this.Vip_List.TabIndex = 16;
-            this.Vip_List.UseCompatibleStateImageBehavior = false;
-            this.Vip_List.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader18
-            // 
-            this.columnHeader18.Text = "Title";
-            this.columnHeader18.Width = 34;
-            // 
-            // columnHeader19
-            // 
-            this.columnHeader19.Text = "Surname";
-            this.columnHeader19.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader19.Width = 129;
-            // 
-            // Search_Vip_Box
-            // 
-            this.Search_Vip_Box.Location = new System.Drawing.Point(92, 40);
-            this.Search_Vip_Box.Name = "Search_Vip_Box";
-            this.Search_Vip_Box.Size = new System.Drawing.Size(164, 20);
-            this.Search_Vip_Box.TabIndex = 15;
-            // 
-            // Vip_Uid_Box
-            // 
-            this.Vip_Uid_Box.Enabled = false;
-            this.Vip_Uid_Box.Location = new System.Drawing.Point(92, 14);
-            this.Vip_Uid_Box.Name = "Vip_Uid_Box";
-            this.Vip_Uid_Box.Size = new System.Drawing.Size(164, 20);
-            this.Vip_Uid_Box.TabIndex = 14;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(48, 43);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(38, 13);
-            this.label22.TabIndex = 13;
-            this.label22.Text = "Name:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(60, 17);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(26, 13);
-            this.label23.TabIndex = 12;
-            this.label23.Text = "Uid:";
-            // 
-            // columnHeader20
-            // 
-            this.columnHeader20.Text = "Position";
-            this.columnHeader20.Width = 120;
-            // 
-            // columnHeader21
-            // 
-            this.columnHeader21.Text = "Company";
-            this.columnHeader21.Width = 98;
-            // 
-            // columnHeader22
-            // 
-            this.columnHeader22.Text = "Name";
-            // 
-            // columnHeader23
-            // 
-            this.columnHeader23.Text = "Level";
-            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader23.Width = 51;
+            this.Temporary_Cards_Label.AutoSize = true;
+            this.Temporary_Cards_Label.Location = new System.Drawing.Point(333, 45);
+            this.Temporary_Cards_Label.Name = "Temporary_Cards_Label";
+            this.Temporary_Cards_Label.Size = new System.Drawing.Size(0, 13);
+            this.Temporary_Cards_Label.TabIndex = 17;
             // 
             // MainForm
             // 
@@ -1030,7 +1072,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DataEntryApp - v0.1.1";
+            this.Text = "DataEntryApp - v0.1.2";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1147,6 +1189,10 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.Label VIP_Cards_Label;
+        private System.Windows.Forms.Label VVIP_Cards_Label;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label Temporary_Cards_Label;
     }
 }
 
