@@ -116,6 +116,9 @@
       <DependentUpon>EventModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <Compile Include="VipCard.cs">
+      <DependentUpon>EventModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -31,5 +31,6 @@ namespace DataEntryApp
         public virtual DbSet<TemporaryCard> TemporaryCards { get; set; }
         public virtual DbSet<SpecialCard> SpecialCards { get; set; }
         public virtual DbSet<MediaCard> MediaCards { get; set; }
+        public virtual DbSet<VipCard> VipCards { get; set; }
     }
 }

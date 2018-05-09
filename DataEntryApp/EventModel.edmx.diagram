@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="EventModel.TemporaryCard" Width="2" PointX="4.5" PointY="2.375" />
         <EntityTypeShape EntityType="EventModel.SpecialCard" Width="2" PointX="4.5" PointY="0.75" />
         <EntityTypeShape EntityType="EventModel.MediaCard" Width="1.5" PointX="6.875" PointY="0.75" />
+        <EntityTypeShape EntityType="EventModel.VipCard" Width="1.5" PointX="6.875" PointY="2.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

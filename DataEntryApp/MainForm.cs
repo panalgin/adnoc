@@ -117,7 +117,6 @@ namespace DataEntryApp
             PcscReader.Error += PcscReader_Error;
         }
 
-
         string lastErrorMessage = "";
 
         private void PcscReader_Error(string message)
@@ -161,6 +160,7 @@ namespace DataEntryApp
                 var exists2 = context.TemporaryCards.FirstOrDefault(q => q.Uid == uid);
                 var exists3 = context.SpecialCards.FirstOrDefault(q => q.Uid == uid);
                 var exists4 = context.MediaCards.FirstOrDefault(q => q.Uid == uid);
+                //var exists5 = context.VipCards.FirstOrDefault(q => q)
 
                 if (exists != null)
                 {
