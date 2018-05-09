@@ -108,6 +108,7 @@
             this.Media_Uid_Box = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.Media_Cards_Label = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -685,6 +686,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Media_Cards_Label);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label17);
@@ -858,15 +860,17 @@
             this.Media_List.TabIndex = 11;
             this.Media_List.UseCompatibleStateImageBehavior = false;
             this.Media_List.View = System.Windows.Forms.View.Details;
+            this.Media_List.SelectedIndexChanged += new System.EventHandler(this.Media_List_SelectedIndexChanged);
+            this.Media_List.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Media_List_MouseDoubleClick);
             // 
             // columnHeader16
             // 
-            this.columnHeader16.Text = "Uid";
+            this.columnHeader16.Text = "Name";
             this.columnHeader16.Width = 120;
             // 
             // columnHeader17
             // 
-            this.columnHeader17.Text = "Serial";
+            this.columnHeader17.Text = "Outlet";
             this.columnHeader17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader17.Width = 168;
             // 
@@ -876,6 +880,7 @@
             this.Search_Media_Box.Name = "Search_Media_Box";
             this.Search_Media_Box.Size = new System.Drawing.Size(164, 20);
             this.Search_Media_Box.TabIndex = 9;
+            this.Search_Media_Box.TextChanged += new System.EventHandler(this.Search_Media_Box_TextChanged);
             // 
             // Media_Uid_Box
             // 
@@ -903,6 +908,14 @@
             this.label21.TabIndex = 6;
             this.label21.Text = "Uid:";
             // 
+            // Media_Cards_Label
+            // 
+            this.Media_Cards_Label.AutoSize = true;
+            this.Media_Cards_Label.Location = new System.Drawing.Point(333, 19);
+            this.Media_Cards_Label.Name = "Media_Cards_Label";
+            this.Media_Cards_Label.Size = new System.Drawing.Size(0, 13);
+            this.Media_Cards_Label.TabIndex = 13;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -915,7 +928,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DataEntryApp - v0.0.8";
+            this.Text = "DataEntryApp - v0.0.9";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1018,6 +1031,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label Media_Cards_Label;
     }
 }
 

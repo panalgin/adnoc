@@ -18,6 +18,7 @@ namespace DataEntryApp
         public EventEntities()
             : base("name=EventEntities")
         {
+            Utility.ConfigureConnectionString(this);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

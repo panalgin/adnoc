@@ -143,6 +143,10 @@ namespace DataEntryApp
             this.Special_Uid_Box.Text = "";
             this.Search_Box.Text = "";
 
+            this.Media_Uid_Box.Text = "";
+            this.Media_List.Items.Clear();
+            this.Search_Media_Box.Text = "";
+
 
             this.Focus();
         }
@@ -156,6 +160,7 @@ namespace DataEntryApp
                 var exists = context.Tokens.FirstOrDefault(q => q.Uid == uid);
                 var exists2 = context.TemporaryCards.FirstOrDefault(q => q.Uid == uid);
                 var exists3 = context.SpecialCards.FirstOrDefault(q => q.Uid == uid);
+                var exists4 = context.MediaCards.FirstOrDefault(q => q.Uid == uid);
 
                 if (exists != null)
                 {
@@ -177,11 +182,20 @@ namespace DataEntryApp
 
                     MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (exists4 != null)
+                {
+                    string message = string.Format("This card [{0}] is already registered as a media/reporter card to {1} - {2}", exists4.Uid, exists4.Name, exists4.Outlet);
+
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else
                 {
                     this.Uid_Box.Text = uid;
                     this.Temp_Uid_Box.Text = uid;
                     this.Special_Uid_Box.Text = uid;
+                    this.Media_Uid_Box.Text = uid;
+
+
                     this.Search_Box.Enabled = true;
                     this.Cancel_Button.Enabled = true;
                     this.Search_Box.Focus();
@@ -268,12 +282,14 @@ namespace DataEntryApp
 
                 var crew = context.SpecialCards.Where(q => q.Level == "Crew").Count();
                 var protocol = context.SpecialCards.Where(q => q.Level == "Protocol").Count();
+                var media = context.MediaCards.Where(q => q.Uid != null && q.Uid.Length > 0).Count();
 
                 this.Total_Guests_Label.Text = totalGuests.ToString();
                 this.Unassigned_Guests_Label.Text = unassigned.ToString();
                 this.Assigned_Guests_Label.Text = assigned.ToString();
                 this.Crew_Cards_Label.Text = crew.ToString();
                 this.Protocol_Cards_Label.Text = protocol.ToString();
+                this.Media_Cards_Label.Text = media.ToString();
             }
         }
 
@@ -616,7 +632,7 @@ namespace DataEntryApp
                 var item = this.Temporary_List.SelectedItems[0];
                 var id = Convert.ToInt32(item.Tag);
 
-                using(var context = new EventEntities())
+                using (var context = new EventEntities())
                 {
                     var existing = context.TemporaryCards.FirstOrDefault(q => q.ID == id);
 
@@ -642,6 +658,97 @@ namespace DataEntryApp
             }
             else
                 this.Delete_Temporary_Button.Enabled = false;
+        }
+
+        private void Search_Media_Box_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Search_Media_Box.Text.Length > 0)
+            {
+                var key = this.Search_Media_Box.Text.ToUpper();
+
+                using (var context = new EventEntities())
+                {
+                    var result = (from m in context.MediaCards
+                                  where m.Name.ToUpper().Contains(key) &&
+                                  m.Uid == null
+                                  select m).ToList();
+
+                    if (result.Count > 0)
+                    {
+                        this.Media_List.BeginUpdate();
+                        this.Media_List.Items.Clear();
+
+                        result.All(delegate (MediaCard card)
+                        {
+                            var item = new ListViewItem()
+                            {
+                                Text = card.Name,
+                            };
+
+                            item.SubItems.Add(card.Outlet);
+                            item.Tag = card.ID;
+
+                            this.Media_List.Items.Add(item);
+
+                            return true;
+                        });
+
+                        this.Media_List.EndUpdate();
+                    }
+                    else
+                        this.Media_List.Items.Clear();
+                }
+            }
+        }
+
+        private void Media_List_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (Media_List.Enabled && Media_List.Items != null && Media_List.Items.Count > 0)
+            {
+                ListViewHitTestInfo info = this.Media_List.HitTest(e.X, e.Y);
+                ListViewItem item = info.Item;
+
+                if (item != null && !string.IsNullOrEmpty(this.Media_Uid_Box.Text))
+                {
+                    var uid = this.Media_Uid_Box.Text;
+                    var name = item.SubItems[0].Text;
+
+                    string message = string.Format("{0} uid will be assigned to media/report \"{1}\", are you sure?", uid, name);
+
+                    if (MessageBox.Show(message, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        var cardId = Convert.ToInt32(item.Tag);
+
+                        AssignMediaCard(uid, cardId);
+                    }
+                }
+            }
+        }
+
+        private void AssignMediaCard(string uid, int cardId)
+        {
+            if (uid.Length > 0)
+            {
+                using (var context = new EventEntities())
+                {
+                    var card = context.MediaCards.FirstOrDefault(q => q.ID == cardId);
+
+                    if (card != null)
+                    {
+                        card.Uid = uid;
+                        context.SaveChanges();
+
+                        ClearInput();
+                        CalculateMetrics();
+                    }
+
+                }
+            }
+        }
+
+        private void Media_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
